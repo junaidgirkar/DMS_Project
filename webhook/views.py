@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import json
 from django.shortcuts import render 
+from .ML_helper import predict_with_saved_model
 
 def home_view(request): 
       
@@ -54,7 +55,10 @@ def dialogflow_webhook(request):
             response_text = missing_data_message.strip(", ")
         else:
             # All data present, proceed with final processing
-            response_text = f"Planning to invest {amount} for {time} years in {county}. Processing your request.... Here ML Predictions will come"
+            top_zip_codes = predict_with_saved_model(model_path='saved_models_smol.pkl', county=county, budget=amount, forecast_years=time, dataset_path='data/zillow_data.csv')
+            # print(top_zip_codes)
+            response_text = "Here are the top 5 zip codes with their forecasted increase (/100) \n"
+            response_text += str(top_zip_codes)
 
     return JsonResponse({"fulfillmentText": response_text})
 

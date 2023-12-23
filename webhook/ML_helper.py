@@ -1,5 +1,5 @@
 import pandas as pd
-import joblib
+import pickle  # Import pickle for loading the model
 
 # Function to reformat date columns
 def reformat_date_columns(dataframe):
@@ -11,8 +11,9 @@ def reformat_date_columns(dataframe):
 
 
 def predict_with_saved_model(model_path, county, budget, forecast_years, dataset_path):
-    # Load the saved models
-    saved_models = joblib.load(model_path)
+    # Load the saved models using pickle
+    with open(model_path, 'rb') as file:
+        saved_models = pickle.load(file)
 
     # Load dataset
     housing_market_data = pd.read_csv(dataset_path)
