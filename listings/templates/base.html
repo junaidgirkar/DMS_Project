@@ -143,6 +143,7 @@ header a:hover {
             <nav>
                 <ul>
                     <li><a href="{% url 'index' %}" class="highlight">Home</a></li>
+                    <li><a href="{% url 'predict' %}">Predict</a></li>  <!-- Predict button -->
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         <!-- Assuming you have a profile page -->
@@ -155,6 +156,7 @@ header a:hover {
             </nav>
         </div>
     </header>
+    
 
     <main class="container">
         {% block content %}
