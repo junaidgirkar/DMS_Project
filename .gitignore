@@ -1,2 +1,4 @@
 webhook/data/zillow_data.csv
 webhook/saved_models_smol.pkl
+venv/
+/venv

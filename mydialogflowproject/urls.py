@@ -24,5 +24,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('webhook/', views.dialogflow_webhook, name='dialogflow_webhook'),
+    path('predict/', views.prediction_view, name='predict'),
+
     # Add other paths as needed
 ]

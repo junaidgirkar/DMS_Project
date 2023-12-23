@@ -1,0 +1,183 @@
+<!-- templates/base.html -->
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Real Estate Site</title>
+   
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+
+
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    min-height: 50px;
+    border-bottom: #bbb 1px solid;
+}
+
+header nav {
+    float: right;
+    margin-top: 0;
+}
+
+header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+header li {
+    float: left;
+    display: inline;
+    padding: 0 15px; /* Adjust the padding as needed */
+}
+
+
+header .highlight, header .current a {
+    color: #e8491d;
+    font-weight: bold;
+}
+
+header a:hover {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.property-item {
+    padding: 15px;
+    background: #ffffff;
+    border-bottom: #bbbbbb 1px solid;
+}
+
+.property-item:last-child {
+    border-bottom: none;
+}
+
+.property-item h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.property-detail {
+    background: #ffffff;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.property-detail h2 {
+    color: #333;
+}
+
+.profile-section {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.property-section {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.property-section:last-child {
+    border-bottom: none;
+}
+
+.listings-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.listings-section li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.listings-section li:last-child {
+    border-bottom: none;
+}
+ </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'index' %}" class="highlight">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        <!-- Assuming you have a profile page -->
+                        <li><a href="{% url 'profile' %}">Profile</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        <!-- Main content will be inserted here by other templates -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <!-- Add your site's footer content here -->
+        </div>
+    </footer>
+
+    <!-- Kommunicate Chat Widget -->
+    <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"2a4242715a50ef2fa05f3fd1f328c91eb","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    </script>
+</body>
+</html>

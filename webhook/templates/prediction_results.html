@@ -1,0 +1,18 @@
+<!-- templates/your_app_name/prediction_results.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Prediction Results</h2>
+    {% if top_zip_codes %}
+      <ul>
+        {% for zipcode, growth_rate in top_zip_codes %}
+          <li>Zipcode: {{ zipcode }}, Predicted Growth Rate: {{ growth_rate|floatformat:2 }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No predictions available.</p>
+    {% endif %}
+  </div>
+{% endblock %}
