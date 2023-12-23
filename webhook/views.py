@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-import json
+import json, os
 from django.shortcuts import render 
 from .ML_helper import predict_with_saved_model
 
@@ -55,10 +55,14 @@ def dialogflow_webhook(request):
             response_text = missing_data_message.strip(", ")
         else:
             # All data present, proceed with final processing
-            top_zip_codes = predict_with_saved_model(model_path='saved_models_smol.pkl', county=county, budget=amount, forecast_years=time, dataset_path='data/zillow_data.csv')
-            # print(top_zip_codes)
-            response_text = "Here are the top 5 zip codes with their forecasted increase (/100) \n"
-            response_text += str(top_zip_codes)
+            print("ML Prediction Start")
+            print(county, amount, time)
+            print(os.getcwd())
+            top_zip_codes = predict_with_saved_model(model_path='webhook/saved_models_smol.pkl', county=county, budget=amount, forecast_years=time, dataset_path='webhook/data/zillow_data.csv')
+            print(top_zip_codes)
+            #response_text = "Here are the top 5 zip codes with their forecasted increase (/100) \n"
+            response_text = str(top_zip_codes)
+            print(response_text)
 
     return JsonResponse({"fulfillmentText": response_text})
 
