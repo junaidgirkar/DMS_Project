@@ -1,0 +1,17 @@
+<!-- templates/listings/property_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="property-detail">
+        <h2>{{ property.region_name }} - Details</h2>
+        <p><strong>Location:</strong> {{ property.city }}, {{ property.state_name }}</p>
+        <p><strong>Year:</strong> {{ property.year }}</p>
+        <p><strong>Size:</strong> {{ property.size }} sqft</p>
+        <p><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+        <p><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+        <p><strong>Price:</strong> ${{ property.price }}</p>
+    </div>
+</div>
+{% endblock %}

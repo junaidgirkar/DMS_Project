@@ -1,0 +1,36 @@
+<!-- templates/listings/house_owner_profile.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ house_owner.user.get_full_name }}'s Profile</h1>
+    <div class="profile-section">
+        <h2>Your Properties and Listings</h2>
+        {% for property in properties %}
+        <div class="property-section">
+            <h3>{{ property.region_name }}</h3>
+            <p>Location: {{ property.city }}, {{ property.state_name }}</p>
+            <p>Size: {{ property.size }} sqft</p>
+            <p>Bedrooms: {{ property.bedrooms }}, Bathrooms: {{ property.bathrooms }}</p>
+            <p>Price: ${{ property.price }}</p>
+
+            <div class="listings-section">
+                <h4>Listings:</h4>
+                <ul>
+                    {% for listing in listings %}
+                    {% if listing.property.id == property.id %}
+                    <li>
+                        Listing ID: {{ listing.id }} - 
+                        {% if listing.is_for_rent %} For Rent {% else %} For Sale {% endif %}
+                        - Active: {{ listing.is_active }}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

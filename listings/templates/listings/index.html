@@ -1,0 +1,16 @@
+<!-- templates/listings/index.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Property Listings</h1>
+    {% for property in properties %}
+    <div class="property-item">
+        <h3><a href="{% url 'property_detail' property.id %}">{{ property.region_name }}</a></h3>
+        <p>{{ property.city }}, {{ property.state_name }}</p>
+        <p>Price: ${{ property.price }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
