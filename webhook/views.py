@@ -75,14 +75,15 @@ def dialogflow_webhook(request):
             #response_text = "Here are the top 5 zip codes with their forecasted increase (/100) \n"
             response_text = str(top_zip_codes)
             print(response_text)
+    return render(request, 'prediction_results.html', {'top_zip_codes': top_zip_codes })
 
-    return JsonResponse({"fulfillmentText": response_text})
+    #return JsonResponse({"fulfillmentText": response_text})
 
 
 
 
 # Include your predict_with_saved_model function here
-
+@csrf_exempt
 def prediction_view(request):
     if request.method == 'POST':
         form = PredictionForm(request.POST)
